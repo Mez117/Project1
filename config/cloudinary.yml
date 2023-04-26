@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dlmzaexlj
+  api_key: '324342714648929'
+  api_secret: Bkx8q91LV5NVLGvqxiANid8M79o
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dlmzaexlj
+  api_key: '324342714648929'
+  api_secret: Bkx8q91LV5NVLGvqxiANid8M79o
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: dlmzaexlj
+  api_key: '324342714648929'
+  api_secret: Bkx8q91LV5NVLGvqxiANid8M79o
+  enhance_image_tag: true
+  static_file_support: false

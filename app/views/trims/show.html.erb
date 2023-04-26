@@ -1,0 +1,18 @@
+<%= image_tag @trim.image, :class => 'feature' %>
+
+<ul>
+
+    <li><%= @trim.color %></li>
+    <li><%= @trim.wheel_size %></li>
+    <li><%= @trim.wheel_mat %></li>
+    <li><%= @trim.interior %></li>
+    <li><%= @trim.sport %></li>
+    <li><%= @trim.int_color %></li>
+    <li><%= @trim.features %></li>
+
+</ul>
+
+<div class="controls">
+    <%= link_to "Edit trim", edit_trim_path(@trim) %>
+    <%= link_to "Delete trim", @trim, :method => :delete, :data => { :confirm => "Are your sure?" } %>
+</div> 

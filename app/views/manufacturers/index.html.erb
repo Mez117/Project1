@@ -1,0 +1,9 @@
+<h1>All Manufacturers</h1>
+
+<% @manufacturers.each do |manufacturer| %>
+
+    <h2><%= manufacturer.name %></h2>
+    <%= link_to image_tag(manufacturer.image, :class => 'thumb'), manufacturer %>
+    <%= link_to image_tag("https://picsum.photos/400", :class => 'thumb'), manufacturer if manufacturer.image.nil? || manufacturer.image.empty? %>
+
+<% end %>

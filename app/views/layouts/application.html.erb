@@ -5,11 +5,38 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= cloudinary_js_config %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+
+    <div class="container">
+
+        <nav>
+
+          <% if @current_user.present? %>
+
+            <% if @current_user.admin? %>
+              <%= link_to "All users", users_path %>
+              |
+            <% end %>
+
+            <%= link_to "All Cars", cars_path %>
+            <%= link_to "New Car", new_car_path %>
+            |
+            <%= link_to "Log out: #{ @current_user.email }", login_path, :method => :delete %>
+
+          <% else %>
+            <%= link_to "Sign up!", new_user_path %>
+            <%= link_to "Sign in!", login_path %>
+          <% end %>
+
+        </nav>
+    
+      <%= yield %>
+
+    </div>
   </body>
 </html>

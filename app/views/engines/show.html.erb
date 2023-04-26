@@ -1,0 +1,21 @@
+<h1><%= @engine.name %></h1>
+
+<%= image_tag @engine.image, :class => 'feature' %>
+
+<ul>
+
+    <li><%= @engine.capacity %></li>
+    <li><%= @engine.hp %></li>
+    <li><%= @engine.torque %></li>
+    <li><%= @engine.mods %></li>
+
+</ul>
+
+<% @engine.cars.each do |car| %>
+    <%= link_to image_tag(car.image, :class => 'thumb'), car %>
+<% end %>
+
+<div class="controls">
+    <%= link_to "Edit engine", edit_engine_path(@engine) %>
+    <%= link_to "Delete engine", @engine, :method => :delete, :data => { :confirm => "Are your sure?" } %>
+</div> 

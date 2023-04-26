@@ -1,0 +1,29 @@
+<%= form_for(@trim, :html => { :multipart => true}) do |f| %>
+
+    <%= f.label :color %>
+    <%= f.text_field :color %>
+
+    <%= f.label :image %>
+    <%= f.cl_image_upload :image_url %>
+
+    <%= f.label :wheel_size %>
+    <%= f.text_field :wheel_size %>
+
+    <%= f.label :wheel_mat %>
+    <%= f.text_field :wheel_mat %>
+
+    <%= f.label :interior %>
+    <%= f.text_field :interior %>
+
+    <%= f.label :sport %>
+    <%= f.text_field :sport %>
+
+    <%= f.label :int_color %>
+    <%= f.text_field :int_color %>
+
+    <%= f.label :features %>
+    <%= f.text_field :features %>
+
+    <%= f.submit %>
+
+<% end %>

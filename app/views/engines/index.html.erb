@@ -1,0 +1,9 @@
+<h1>All Engines</h1>
+
+<% @engines.each do |engine| %>
+
+    <h2><%= engine.name %></h2>
+    <%= link_to image_tag(engine.image, :class => 'thumb'), engine %>
+    <%= link_to image_tag("https://picsum.photos/400", :class => 'thumb'), engine if engine.image.nil? || engine.image.empty? %>
+
+<% end %>

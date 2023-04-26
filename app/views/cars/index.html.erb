@@ -1,0 +1,9 @@
+<h1>All Cars</h1>
+
+<% @cars.each do |car| %>
+
+    <h2><%= car.name %></h2>
+    <%= link_to image_tag(car.image, :class => 'thumb'), car %>
+    <%= link_to image_tag("https://picsum.photos/1000", :class => 'thumb'), car if car.image.nil? || car.image.empty? %>
+
+<% end %>

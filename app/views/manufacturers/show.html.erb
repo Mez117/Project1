@@ -1,0 +1,19 @@
+<h1><%= @manufacturer.name %></h1>
+
+<%= image_tag @manufacturer.image, :class => 'feature' %>
+
+<ul>
+
+    <li><%= @manufacturer.founded %></li>
+    <li><%= @manufacturer.location %></li>
+
+</ul>
+
+<% @manufacturer.cars.each do |car| %>
+    <%= link_to image_tag(car.image, :class => 'thumb'), car %>
+<% end %>
+
+<div class="controls">
+    <%= link_to "Edit manufacturer", edit_manufacturer_path(@manufacturer) %>
+    <%= link_to "Delete manufacturer", @manufacturer, :method => :delete, :data => { :confirm => "Are your sure?" } %>
+</div> 
