@@ -1,5 +1,4 @@
 class EnginesController < ApplicationController
-  def index
     before_action :check_for_login
 
     def index

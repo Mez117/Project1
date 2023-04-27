@@ -11,7 +11,12 @@ class CarsController < ApplicationController
   end
 
   def create
-    @current_user.cars.create car_params
+    car = @current_user.cars.create car_params
+    if params[:file].present?
+        req = Cloudinary::Uploader.upload(params[:file])
+        car.image = req["public_id"]
+        car.save
+    end
     redirect_to root_path
   end
 
@@ -20,8 +25,14 @@ class CarsController < ApplicationController
   end
 
   def update
-    @current_user.cars.update car_params
-    redirect_to car
+    car = @current_user.cars.find params[:id]
+    if params[:file].present?
+      req = Cloudinary::Uploader.upload(params[:file])
+      car.image = req["public_id"]
+    end
+    car.update_attributes car_params
+    car.save
+    redirect_to car_params
   end
 
   def show
@@ -29,7 +40,8 @@ class CarsController < ApplicationController
   end
 
   def destroy
-    @current_user.cars.destroy car_params
+    car = @current_user.cars.find params[:id]
+    car.destroy
     redirect_to root_path
   end
 

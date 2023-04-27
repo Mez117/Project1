@@ -15,7 +15,9 @@ class TrimsController < ApplicationController
   end
 
   def update
-    @current_user.trims.update trim_params
+    # @current_user.trims.update trim_params
+    trim = Trim.find params[:id]
+    trim.update trim_params
     redirect_to trim
   end
 

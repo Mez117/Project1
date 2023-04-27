@@ -3,7 +3,7 @@
 <% @cars.each do |car| %>
 
     <h2><%= car.name %></h2>
-    <%= link_to image_tag(car.image, :class => 'thumb'), car %>
-    <%= link_to image_tag("https://picsum.photos/1000", :class => 'thumb'), car if car.image.nil? || car.image.empty? %>
+    <%= link_to cl_image_tag(car.image, :class => 'thumb'), car unless cl_image_tag(car.image).nil? %>
+    <%= link_to image_tag("https://picsum.photos/500", :class => 'thumb'), car if car.image.nil? || car.image.empty? %>
 
 <% end %>

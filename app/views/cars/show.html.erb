@@ -1,12 +1,12 @@
 <h1><%= @car.name %></h1>
 
-<%= image_tag @car.image, :class => 'feature' %>
+<%= cl_image_tag @car.image, :class => 'feature' %>
 
 <ul>
 
-    <li><%= link_to @car.manufacturer.name, @car.manufacturer %></li>
-    <li><%= link_to @car.trim.color, @car.trim %></li>
-    <li><%= link_to @car.engine.name, @car.engine %></li>
+    <li><%= link_to @car.manufacturer.name, @car.manufacturer unless @car.manufacturer.nil? %></li>
+    <li><%= link_to @car.trim.color, @car.trim unless @car.trim.nil? %></li>
+    <li><%= link_to @car.engine.name, @car.engine unless @car.engine.nil? %></li>
 
 </ul>
 
