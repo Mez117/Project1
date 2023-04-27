@@ -1,21 +1,45 @@
+<div class="container">
 <h1><%= @engine.name %></h1>
 
-<%= image_tag @engine.image, :class => 'feature' %>
+    <% if @engine.image.start_with?('/image') %>
+        <%= image_tag(@engine.image, skip_pipeline: true, class: 'feature') %>
+    <% else %>
+      <%= cl_image_tag(@engine.image, class: 'feature') %>
+    <% end %>
 
 <ul>
 
-    <li><%= @engine.capacity %></li>
-    <li><%= @engine.hp %></li>
-    <li><%= @engine.torque %></li>
-    <li><%= @engine.mods %></li>
+    <li>Engine Size: <%= @engine.capacity %>cc</li>
+    <li>Power: <%= @engine.hp %>hp and <%= @engine.torque %>nm of torque</li>
+    <li>additional features: <%= @engine.mods %></li>
 
 </ul>
 
-<% @engine.cars.each do |car| %>
-    <%= link_to image_tag(car.image, :class => 'thumb'), car %>
-<% end %>
-
 <div class="controls">
-    <%= link_to "Edit engine", edit_engine_path(@engine) %>
-    <%= link_to "Delete engine", @engine, :method => :delete, :data => { :confirm => "Are your sure?" } %>
+    <%= link_to "Edit engine", edit_engine_path(@engine), :class => "btn btn-primary" %>
+    <%= link_to "Delete engine", @engine, :class => "btn btn-primary", :method => :delete, :data => { :confirm => "Are your sure?" } %>
 </div> 
+
+<h1>All Favourite cars which include <%= @engine.name %></h1>
+
+<div class="row">
+    <% @engine.cars.each do |car| %>
+
+    <div class="col-sm-8 col-md-4 col-lg-6">
+    <h2><%= car.name %></h2>
+    <% if car.image.present? %>
+        <% if car.image.start_with?('/image') %>
+            <%= link_to image_tag(car.image, skip_pipeline: true, class: "card-img-top img-fluid"), car %>
+        <% else %>
+        <%= link_to cl_image_tag(car.image, class: "card-img-top img-fluid"), car %>
+        <% end %>
+    <% else %>
+        <%= link_to image_tag('https://picsum.photos/500', class: "card-img-top img-fluid"), car %>
+    <% end %>
+    </div>
+    <% end %>
+    
+</div>
+
+
+</div>

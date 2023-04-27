@@ -1,18 +1,24 @@
-<%= image_tag @trim.image, :class => 'feature' %>
+<div class="container">
+<% if @trim.image.present? %>
+<% if @trim.image.start_with?('/image') %>
+        <%= image_tag(@trim.image, skip_pipeline: true, class: 'feature') %>
+    <% else %>
+      <%= cl_image_tag(@trim.image, class: 'feature') %>
+    <% end %>
+<% end %>
 
 <ul>
 
-    <li><%= @trim.color %></li>
-    <li><%= @trim.wheel_size %></li>
-    <li><%= @trim.wheel_mat %></li>
-    <li><%= @trim.interior %></li>
+    <li>Color: <%= @trim.color %></li>
+    <li>Wheels: <%= @trim.wheel_size %> inch <%= @trim.wheel_mat %> wheels</li>
+    <li>Interior: <%= @trim.int_color %> <%= @trim.interior %></li>
     <li><%= @trim.sport %></li>
-    <li><%= @trim.int_color %></li>
-    <li><%= @trim.features %></li>
+    <li>Additional features: <%= @trim.features %></li>
 
 </ul>
 
 <div class="controls">
-    <%= link_to "Edit trim", edit_trim_path(@trim) %>
-    <%= link_to "Delete trim", @trim, :method => :delete, :data => { :confirm => "Are your sure?" } %>
+    <%= link_to "Edit trim", edit_trim_path(@trim), :class => "btn btn-primary" %>
+    <%= link_to "Delete trim", @trim, :class => "btn btn-primary", :method => :delete, :data => { :confirm => "Are your sure?" } %>
 </div> 
+</div>

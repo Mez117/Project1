@@ -1,16 +1,35 @@
+<div class="container">
 <h1><%= @car.name %></h1>
 
-<%= cl_image_tag @car.image, :class => 'feature' %>
+  <% if @car.image.present? %>
+    <% if @car.image.start_with?('/image') %>
+        <%= image_tag(@car.image, skip_pipeline: true, class: 'feature') %>
+    <% else %>
+      <%= cl_image_tag(@car.image, class: 'feature') %>
+    <% end %>
+  <% else %>
+    <%= image_tag('https://picsum.photos/500', class: 'feature') %>
+  <% end %>
 
 <ul>
 
-    <li><%= link_to @car.manufacturer.name, @car.manufacturer unless @car.manufacturer.nil? %></li>
-    <li><%= link_to @car.trim.color, @car.trim unless @car.trim.nil? %></li>
-    <li><%= link_to @car.engine.name, @car.engine unless @car.engine.nil? %></li>
+    <li>Manufacturer: <%= link_to @car.manufacturer.name, @car.manufacturer unless @car.manufacturer.nil? %></li>
+    <% if @trim.nil? %>
+    <li>Add Trim: <%= link_to 'add', new_trim_path %></li>
+    <% else %>
+    <li><%= link_to 'Car model features', @trim %></li>
+    <% end %>
+    <%# -------------------------------------------------------------- #%>
+
+
+
+    <%# -------------------------------------------------------------- #%>
+    <li>Engine: <%= link_to @car.engine.name, @car.engine unless @car.engine.nil? %></li>
 
 </ul>
 
 <div class="controls">
-    <%= link_to "Edit car", edit_car_path(@car) %>
-    <%= link_to "Delete car", @car, :method => :delete, :data => { :confirm => "Are your sure?" } %>
+    <%= link_to "Edit car", edit_car_path(@car), :class => "btn btn-primary" %>
+    <%= link_to "Delete car", @car, :class => "btn btn-primary", :method => :delete, :data => { :confirm => "Are your sure?" } %>
 </div> 
+</div>

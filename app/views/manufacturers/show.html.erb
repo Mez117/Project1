@@ -1,19 +1,46 @@
+<div class="container">
 <h1><%= @manufacturer.name %></h1>
 
-<%= image_tag @manufacturer.image, :class => 'feature' %>
+<% if @manufacturer.image.present? %>
+<% if @manufacturer.image.start_with?('/image') %>
+        <%= image_tag(@manufacturer.image, skip_pipeline: true, class: 'feature') %>
+    <% else %>
+      <%= cl_image_tag(@manufacturer.image, class: 'feature') %>
+    <% end %>
+<% end %>
 
 <ul>
 
-    <li><%= @manufacturer.founded %></li>
-    <li><%= @manufacturer.location %></li>
+    <li>Date when Company was founded: <%= @manufacturer.founded.strftime "%A, %B #{@manufacturer.founded.day.ordinalize}, %Y" %></li>
+    <li>Location where company was founded: <%= @manufacturer.location %></li>
 
 </ul>
 
-<% @manufacturer.cars.each do |car| %>
-    <%= link_to image_tag(car.image, :class => 'thumb'), car %>
-<% end %>
-
 <div class="controls">
-    <%= link_to "Edit manufacturer", edit_manufacturer_path(@manufacturer) %>
-    <%= link_to "Delete manufacturer", @manufacturer, :method => :delete, :data => { :confirm => "Are your sure?" } %>
+    <%= link_to "Edit manufacturer", edit_manufacturer_path(@manufacturer), :class => "btn btn-primary" %>
+    <%= link_to "Delete manufacturer", @manufacturer, :class => "btn btn-primary", :method => :delete, :data => { :confirm => "Are your sure?" } %>
 </div> 
+
+<h1>All favourite cars made by <%= @manufacturer.name %></h1>
+
+<div class="row">
+    <% @manufacturer.cars.each do |car| %>
+
+    <div class="col-sm-8 col-md-4 col-lg-6">
+    <h2><%= car.name %></h2>
+    <% if car.image.present? %>
+        <% if car.image.start_with?('/image') %>
+            <%= link_to image_tag(car.image, skip_pipeline: true, class: "card-img-top img-fluid"), car %>
+        <% else %>
+        <%= link_to cl_image_tag(car.image, class: "card-img-top img-fluid"), car %>
+        <% end %>
+    <% else %>
+        <%= link_to image_tag('https://picsum.photos/500', class: "card-img-top img-fluid"), car %>
+    <% end %>
+    </div>
+    <% end %>
+    
+</div>
+
+
+</div>

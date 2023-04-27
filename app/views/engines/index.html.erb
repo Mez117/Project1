@@ -1,9 +1,23 @@
 <h1>All Engines</h1>
 
-<% @engines.each do |engine| %>
+<div class="container">
+<h1>All Engines</h1>
+-----------------------------------------------------------------------------------------------------------------------------------
+    <div class="row">
+        <% @engines.each do |engine| %>
 
-    <h2><%= engine.name %></h2>
-    <%= link_to image_tag(engine.image, :class => 'thumb'), engine %>
-    <%= link_to image_tag("https://picsum.photos/400", :class => 'thumb'), engine if engine.image.nil? || engine.image.empty? %>
-
-<% end %>
+        <div class="col-sm-6 col-md-4 col-lg-6">
+            <h2><%= engine.name %></h2>
+            <% if engine.image.present? %>
+                <% if engine.image.start_with?('/image') %>
+                    <%= link_to image_tag(engine.image, skip_pipeline: true, class: "card-img-top img-fluid"), engine %>
+                <% else %>
+                    <%= link_to cl_image_tag(engine.image, class: "card-img-top img-fluid"), engine %>
+                <% end %>
+            <% else %>
+                <%= link_to image_tag('https://picsum.photos/500', class: "card-img-top img-fluid"), engine %>
+            <% end %>
+        </div>
+        <% end %>
+    </div>
+</div>

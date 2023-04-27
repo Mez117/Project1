@@ -1,0 +1,47 @@
+.thumb {
+    height: 250px;
+}
+
+.feature {
+    max-height: 500px;
+}
+
+.navbar-collapse {
+    transition: height 0.3s ease-in-out;
+}
+  
+.navbar-collapse.collapsing {
+    height: 0;
+}
+
+.form-control {
+    width: 600px;
+    /* margin-top: 40px;
+    margin-bottom: 20px; */
+}
+
+.form-control {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.form-control:focus, .form-control:hover {
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+
+.container {
+    margin-top: 80px;
+}
+
+li {
+    list-style-type: none;
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+}

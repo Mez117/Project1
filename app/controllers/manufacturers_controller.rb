@@ -10,8 +10,13 @@ class ManufacturersController < ApplicationController
   end
 
   def create
-    @current_user.manufacturers.create manufacturer_params
-    redirect_to root_path
+    manufacturer = Manufacturer.create manufacturer_params
+    if params[:file].present?
+        req = Cloudinary::Uploader.upload(params[:file])
+        manufacturer.image = req["public_id"]
+        manufacturer.save
+    end
+    redirect_to manufacturer
   end
 
   def edit
@@ -19,8 +24,14 @@ class ManufacturersController < ApplicationController
   end
 
   def update
-    @current_user.manufacturers.update manufacturer_params
-    redirect_to manufacturer
+    manufacturer = Manufacturer.find params[:id]
+    if params[:file].present?
+      req = Cloudinary::Uploader.upload(params[:file])
+      manufacturer.image = req["public_id"]
+    end
+    manufacturer.update_attributes manufacturer_params
+    manufacturer.save
+    redirect_to manufacturer_params
   end
 
   def show
@@ -28,12 +39,13 @@ class ManufacturersController < ApplicationController
   end
 
   def destroy
-    @current_user.manufacturers.destroy manufacturer_params
-    redirect_to root_path
+    manufacturer = Manufacturer.find params[:id]
+    manufacturer.destroy
+    redirect_to manufacturer
   end
 
   private
   def manufacturer_params
-    params.require(:manufacturer).permit(:name)
+    params.require(:manufacturer).permit(:name, :image, :founded, :location)
   end
 end

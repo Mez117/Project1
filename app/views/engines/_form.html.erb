@@ -1,23 +1,26 @@
+<div class="container">
 <%= form_for(@engine, :html => { :multipart => true}) do |f| %>
 
     <%= f.label :name %>
-    <%= f.text_field :name %>
-
-    <%= f.label :image %>
-    <%= f.cl_image_upload :image_url %>
+    <%= f.text_field :name, :class => "form-control" %>
 
     <%= f.label :capacity %>
-    <%= f.text_field :capacity %>
+    <%= f.text_field :capacity, :class => "form-control" %>
 
     <%= f.label :hp %>
-    <%= f.text_field :hp %>
+    <%= f.text_field :hp, :class => "form-control" %>
 
     <%= f.label :torque %>
-    <%= f.text_field :torque %>
+    <%= f.text_field :torque, :class => "form-control" %>
 
-    <%= f.label :mod %>
-    <%= f.text_field :mod %>
+    <%= f.label :mods %>
+    <%= f.text_field :mods, :class => "form-control" %>
 
-    <%= f.submit %>
+    <%= f.label :image %>
+    <%= f.cl_image_upload :image_url, :class => "form-control" %>
+
+    <p></p>
+    <%= f.submit :class => "btn btn-primary" %>
 
 <% end %>
+</div>

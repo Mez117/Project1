@@ -1,29 +1,32 @@
-<%= form_for(@trim, :html => { :multipart => true}) do |f| %>
+<div class="container">
+<%= form_with(model: [@car, @trim], :html => { :multipart => true }) do |f| %>
 
     <%= f.label :color %>
-    <%= f.text_field :color %>
-
-    <%= f.label :image %>
-    <%= f.cl_image_upload :image_url %>
+    <%= f.text_field :color, :class => "form-control" %>
 
     <%= f.label :wheel_size %>
-    <%= f.text_field :wheel_size %>
+    <%= f.text_field :wheel_size, :class => "form-control" %>
 
     <%= f.label :wheel_mat %>
-    <%= f.text_field :wheel_mat %>
+    <%= f.text_field :wheel_mat, :class => "form-control" %>
 
     <%= f.label :interior %>
-    <%= f.text_field :interior %>
+    <%= f.text_field :interior, :class => "form-control" %>
 
     <%= f.label :sport %>
-    <%= f.text_field :sport %>
+    <%= f.text_field :sport, :class => "form-control" %>
 
     <%= f.label :int_color %>
-    <%= f.text_field :int_color %>
+    <%= f.text_field :int_color, :class => "form-control" %>
 
     <%= f.label :features %>
-    <%= f.text_field :features %>
+    <%= f.text_field :features, :class => "form-control" %>
+    
+    <%= f.label :image %>
+    <%= f.cl_image_upload :image_url, :class => "form-control" %>
+    <p></p>
 
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-primary" %>
 
 <% end %>
+</div>

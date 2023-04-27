@@ -1,9 +1,22 @@
 <h1>All Manufacturers</h1>
 
-<% @manufacturers.each do |manufacturer| %>
+<div class="container">
+<h1>All Manufacturers</h1>
+-----------------------------------------------------------------------------------------------------------------------------------
+    <div class="row">
+        <% @manufacturers.each do |manufacturer| %>
 
-    <h2><%= manufacturer.name %></h2>
-    <%= link_to image_tag(manufacturer.image, :class => 'thumb'), manufacturer %>
-    <%= link_to image_tag("https://picsum.photos/400", :class => 'thumb'), manufacturer if manufacturer.image.nil? || manufacturer.image.empty? %>
-
-<% end %>
+        <div class="col-sm-6 col-md-4 col-lg-6">
+            <% if manufacturer.image.present? %>
+                <% if manufacturer.image.start_with?('/image') %>
+                    <%= link_to image_tag(manufacturer.image, skip_pipeline: true, class: "card-img-top img-fluid"), manufacturer %>
+                <% else %>
+                    <%= link_to cl_image_tag(manufacturer.image, class: "card-img-top img-fluid"), manufacturer %>
+                <% end %>
+            <% else %>
+                <%= link_to image_tag('https://picsum.photos/500', class: "card-img-top img-fluid"), manufacturer %>
+            <% end %>
+        </div>
+        <% end %>
+    </div>
+</div>

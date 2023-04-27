@@ -37,6 +37,10 @@ class CarsController < ApplicationController
 
   def show
     @car = Car.find params[:id]
+    unless @car.trims.where(id: params[:id]).empty?
+    @trim = @car.trims.find params[:id]
+    end
+    # end
   end
 
   def destroy
@@ -47,6 +51,6 @@ class CarsController < ApplicationController
 
   private
   def car_params
-    params.require(:car).permit(:name)
+    params.require(:car).permit(:name, :image, :manufacturer_id, :trim_id, :engine_id)
   end
 end

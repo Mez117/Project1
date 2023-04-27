@@ -1,17 +1,20 @@
+<div class="container">
 <%= form_for(@manufacturer, :html => { :multipart => true}) do |f| %>
 
     <%= f.label :name %>
-    <%= f.text_field :name %>
-
-    <%= f.label :image %>
-    <%= f.cl_image_upload :image_url %>
+    <%= f.text_field :name, :class => "form-control" %>
 
     <%= f.label :founded %>
-    <%= f.text_field :founded %>
+    <%= f.text_field :founded, :class => "form-control" %>
 
     <%= f.label :location %>
-    <%= f.text_field :location %>
+    <%= f.text_field :location, :class => "form-control" %>
+    
+    <%= f.label :image %>
+    <%= f.cl_image_upload :image_url, :class => "form-control" %>
 
-    <%= f.submit %>
+    <p></p>
+    <%= f.submit :class => "btn btn-primary" %>
 
 <% end %>
+</div>

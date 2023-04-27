@@ -10,8 +10,13 @@ class EnginesController < ApplicationController
     end
   
     def create
-      @current_user.engines.create engine_params
-      redirect_to root_path
+      engine = Engine.create engine_params
+      if params[:file].present?
+          req = Cloudinary::Uploader.upload(params[:file])
+          engine.image = req["public_id"]
+          engine.save
+      end
+      redirect_to engine
     end
   
     def edit
@@ -19,8 +24,14 @@ class EnginesController < ApplicationController
     end
   
     def update
-      @current_user.engines.update engine_params
-      redirect_to engine
+      engine = Engine.find params[:id]
+      if params[:file].present?
+        req = Cloudinary::Uploader.upload(params[:file])
+        engine.image = req["public_id"]
+      end
+      engine.update_attributes engine_params
+      engine.save
+      redirect_to engine_params
     end
   
     def show
@@ -28,12 +39,13 @@ class EnginesController < ApplicationController
     end
   
     def destroy
-      @current_user.engines.destroy engine_params
-      redirect_to root_path
+      engine = Engine.find params[:id]
+      engine.destroy
+      redirect_to engine
     end
   
     private
     def engine_params
-      params.require(:engine).permit(:name)
+      params.require(:engine).permit(:name, :capacity, :hp, :torque, :mods, :image)
     end
 end

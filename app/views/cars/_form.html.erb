@@ -1,20 +1,20 @@
+<div class="container">
 <%= form_for(@car, :html => { :multipart => true}) do |f| %>
 
     <%= f.label :name %>
-    <%= f.text_field :name %>
-
-    <%= f.label :image %>
-    <%= f.cl_image_upload :image_url %>
+    <%= f.text_field :name, :class => "form-control", :placeholder => "Mustang" %>
 
     <%= f.label :manufacturer_id %>
-    <%= f.select :manufacturer_id, Manufacturer.pluck(:name, :id), :include_blank => true %>
+    <%= f.select :manufacturer_id, Manufacturer.pluck(:name, :id), :include_blank => true, :class => "form-control" %>
 
     <%= f.label :engine_id %>
-    <%= f.select :engine_id, Engine.pluck(:name, :id), :include_blank => true %>
+    <%= f.select :engine_id, Engine.pluck(:name, :id), :include_blank => true, :class => "form-control" %>
+    
+    <%= f.label :image %>
+    <%= f.cl_image_upload :image_url, :class => "form-control" %>
+    <p></p>
 
-    <%= f.label :trim_id %>
-    <%= f.select :trim_id, Trim.pluck(:color, :id), :include_blank => true %>
-
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-primary" %>
 
 <% end %>
+</div>
